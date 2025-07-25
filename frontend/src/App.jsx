@@ -8,7 +8,7 @@ function App() {
   const fetchSuggestions = async (input) => {
     setQuery(input)
     if (input.length > 1) {
-      const res = await fetch(`https://restaurant-nlp-review-backend.onrender.com/autocomplete?query=${input}`)
+      const res = await fetch(`https://restaurant-nlp-review-backenddocker.onrender.com/autocomplete?query=${input}`)
       const data = await res.json()
       setSuggestions(data.suggestions || [])
     } else {
@@ -17,7 +17,7 @@ function App() {
   }
 
   const fetchReview = async (name) => {
-    const res = await fetch(`https://restaurant-nlp-review-backend.onrender.com/review?restaurant=${encodeURIComponent(name)}`)
+    const res = await fetch(`https://restaurant-nlp-review-backenddocker.onrender.com/review?restaurant=${encodeURIComponent(name)}`)
     const data = await res.json()
     setReview(data.review)
     setQuery(name)
