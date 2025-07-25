@@ -1,7 +1,8 @@
-import requests
-from keybert import KeyBERT
+import spacy
+from collections import Counter
+from spacy.lang.en.stop_words import STOP_WORDS
 
-kw_model = KeyBERT()
+nlp = spacy.load("en_core_web_sm")
 
 def autocomplete_search(api_key, input_text):
     url = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
@@ -30,9 +31,8 @@ def extract_top_and_bottom_reviews(reviews, top_n=10):
     return top_reviews, bottom_reviews
 
 def extract_key_phrases_from_reviews(reviews):
-    texts = [review['text'] for review in reviews if 'text' in review]
-    combined_text = " ".join(texts)
-    if not combined_text:
-        return []
-    keywords = kw_model.extract_keywords(combined_text, keyphrase_ngram_range=(1, 2), stop_words='english', top_n=10)
-    return [kw for kw, _ in keywords]
+    text = " ".join(r.get("text", "") for r in reviews)
+    doc = nlp(text)
+    phrases = [chunk.text.lower() for chunk in doc.noun_chunks if chunk.text.lower() not in STOP_WORDS and len(chunk.text) > 1]
+    most_common = [p for p, _ in Counter(phrases).most_common(10)]
+    return most_common
