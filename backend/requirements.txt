@@ -1,5 +1,5 @@
-numpy==2.0.0
-spacy
+numpy==1.23.5
+spacy==3.7.2
 sentence-transformers
 openai
 requests
