@@ -5,7 +5,7 @@ description = "A restaurant review NLP project"
 authors = ["Your Name <your.email@example.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.13"
+python = "^3.12"
 flask = "^2.3.3"
 requests = "^2.31.0"
 numpy = "^2.0.0"
