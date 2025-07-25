@@ -18,8 +18,11 @@ WORKDIR /app
 # Copy dependency list
 COPY backend/requirements.txt /app/requirements.txt
 
-# Upgrade pip and install dependencies
+# Upgrade pip and install compatible numpy first
 RUN pip install --upgrade pip setuptools wheel
+RUN pip install numpy==1.23.5
+
+# Now install the rest of the dependencies
 RUN pip install -r /app/requirements.txt
 
 # Copy source code
