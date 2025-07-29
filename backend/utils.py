@@ -4,11 +4,11 @@ from spacy.lang.en.stop_words import STOP_WORDS
 
 nlp = spacy.load("en_core_web_sm")
 
-def autocomplete_search(api_key, input_text):
-    url = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
+def text_search(api_key, query):
+    url = "https://maps.googleapis.com/maps/api/place/textsearch/json"
     params = {
-        "input": input_text,
-        "types": "establishment",
+        "query": query,
+        "type": "restaurant",
         "key": api_key
     }
     response = requests.get(url, params=params)
