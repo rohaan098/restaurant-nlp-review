@@ -1,4 +1,4 @@
-import spacy
+import spacy,requests
 from collections import Counter
 from spacy.lang.en.stop_words import STOP_WORDS
 
